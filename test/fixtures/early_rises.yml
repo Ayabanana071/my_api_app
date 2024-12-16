@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  wake_up_time: 2024-12-16 08:23:31
+  cleared_at: 2024-12-16 08:23:31
+  status: MyString
+
+two:
+  user_id: 1
+  wake_up_time: 2024-12-16 08:23:31
+  cleared_at: 2024-12-16 08:23:31
+  status: MyString
