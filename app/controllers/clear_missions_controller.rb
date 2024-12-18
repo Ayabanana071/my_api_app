@@ -28,8 +28,15 @@ class ClearMissionsController < ApplicationController
       return
     end
 
-    missions = current_user.clear_missions.where(date: start_date..end_date)
+    missions = current_user.clear_missions.where(date: start_date..end_date).sum(:completed_missions_count)
     render json: missions
+  end
+
+  def total_clear_missions_count
+    total_count = ClearMission.where(user_id: current_user.id).sum(:completed_missions_count)
+    pp "------------------------------"
+    pp total_count
+    render json: { total_clear_missions_count: total_count }, status: :ok
   end
 
   private

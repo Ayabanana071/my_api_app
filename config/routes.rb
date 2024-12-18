@@ -16,10 +16,13 @@ Rails.application.routes.draw do
 
   resources :points, only: [:index, :create]
 
+  get '/clear_missions', to: 'clear_missions#index'
   post '/clear_missions', to: 'clear_missions#create_or_update'
+  get '/clear_missions/total_clear_missions_count', to: 'clear_missions#total_clear_missions_count'
 
   resources :wake_up_times, only: [:create]
 
+  get '/early_rises/total_success_count', to: 'early_rises#total_success_count'
   resources :early_rises, only: [:create, :index]
 
   get 'rankings/weekly', to: 'rankings#weekly'

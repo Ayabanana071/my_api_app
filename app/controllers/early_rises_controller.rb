@@ -39,6 +39,13 @@ class EarlyRisesController < ApplicationController
     render json: wake_up_times
   end
 
+  def total_success_count
+    success_count = current_user.early_rises.where(status: "成功").count
+    pp "================================="
+    print(success_count)
+    render json: { total_success_count: success_count }
+  end
+
   private
 
   def authenticate_user!
