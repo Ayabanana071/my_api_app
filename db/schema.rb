@@ -11,17 +11,20 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2024_12_15_232331) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
   create_table "clear_missions", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.date "date", null: false
     t.integer "completed_missions_count", default: 0, null: false
     t.integer "total_points", default: 0, null: false
@@ -32,7 +35,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_15_232331) do
   end
 
   create_table "early_rises", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "wake_up_time", null: false
     t.datetime "cleared_at"
     t.string "status", default: "未設定", null: false
@@ -42,15 +45,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_15_232331) do
   end
 
   create_table "friends", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "friend_id"
+    t.bigint "user_id", null: false
+    t.bigint "friend_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id", "friend_id"], name: "index_friends_on_user_id_and_friend_id", unique: true
+    t.index ["friend_id"], name: "index_friends_on_friend_id"
+    t.index ["user_id"], name: "index_friends_on_user_id"
   end
 
   create_table "points", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.integer "amount", null: false
     t.datetime "granted_at", null: false
     t.datetime "created_at", null: false
@@ -60,7 +64,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_15_232331) do
 
   create_table "tokens", force: :cascade do |t|
     t.string "value"
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_tokens_on_user_id"
